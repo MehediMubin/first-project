@@ -5,21 +5,24 @@ import { Student, UserName } from './student.interface';
 
 const userNameSchema = new Schema<UserName>({
     firstName: { type: String, required: true },
-    middleName: { type: String, required: true },
+    middleName: { type: String },
     lastName: { type: String, required: true },
 });
 
 // This is Schema
 const studentSchema = new Schema<Student>({
-    id: { type: String, required: true },
-    name: userNameSchema,
+    id: { type: String, required: true, unique: true },
+    name: {
+        type: userNameSchema,
+        required: true,
+    },
     gender: {
         type: String,
         enum: ['male', 'female'],
         required: true,
     },
     dateOfBirth: { type: String },
-    email: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
     contactNumber: { type: String, required: true },
     bloodGroup: {
         type: String,
@@ -30,7 +33,7 @@ const studentSchema = new Schema<Student>({
     isActive: {
         type: String,
         enum: ['true', 'false'],
-        required: true,
+        default: 'true',
     },
 });
 
