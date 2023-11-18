@@ -14,5 +14,5 @@ export type Student = {
     bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'O-' | 'AB+' | 'AB-';
     address: string;
     profileImage?: string;
-    isActive: true | false;
+    isActive: 'true' | 'false';
 };

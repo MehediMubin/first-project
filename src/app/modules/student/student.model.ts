@@ -13,14 +13,25 @@ const userNameSchema = new Schema<UserName>({
 const studentSchema = new Schema<Student>({
     id: { type: String, required: true },
     name: userNameSchema,
-    gender: ['male', 'female'],
+    gender: {
+        type: String,
+        enum: ['male', 'female'],
+        required: true,
+    },
     dateOfBirth: { type: String },
     email: { type: String, required: true },
     contactNumber: { type: String, required: true },
-    bloodGroup: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
+    bloodGroup: {
+        type: String,
+        enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
+    },
     address: { type: String, required: true },
     profileImage: { type: String },
-    isActive: ['true', 'false'],
+    isActive: {
+        type: String,
+        enum: ['true', 'false'],
+        required: true,
+    },
 });
 
 // This is Model
