@@ -10,7 +10,7 @@ export type Student = {
   id: string;
   name: UserName;
   gender: 'male' | 'female';
-  dateOfBirth: string;
+  dateOfBirth?: string;
   email: string;
   contactNumber: string;
   bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'O-' | 'AB+' | 'AB-';
