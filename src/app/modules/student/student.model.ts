@@ -1,15 +1,19 @@
 // Here, we will put schema and model together
 
 import { Schema, connect, model } from 'mongoose';
-import { Student } from './student.interface';
+import { Student, UserName } from './student.interface';
 
+const userNameSchema = new Schema<UserName> ({
+    firstName: {type: String, required: true},
+    middleName: {type: String, required: true},
+    lastName: {type: String, required: true}
+
+})
+
+// This is Schema
 const studentSchema = new Schema<Student>({
   id: { type: String, required: true },
-  name: {
-    firstName: { type: String, required: true },
-    middleName: { type: String, required: true },
-    lastName: { type: String, required: true },
-  },
+  name: userNameSchema,
   gender: ['male', 'female'],
   dateOfBirth: { type: String },
   email: { type: String, required: true },
@@ -19,3 +23,6 @@ const studentSchema = new Schema<Student>({
   profileImage: { type: String },
   isActive: [true, false],
 });
+
+// This is Model
+const Student = model<Student>('Student', studentSchema);
