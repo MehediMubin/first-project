@@ -12,7 +12,10 @@ app.use(express.json());
 app.use('/api/v1/students', StudentRoutes);
 
 app.get('/', (req: Request, res: Response) => {
-    res.send('Hello World!');
+    res.status(200).json({
+        success: true,
+        message: 'Welcome to the API',
+    });
 });
 
 export default app;

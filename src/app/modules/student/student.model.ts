@@ -3,36 +3,61 @@
 import { Schema, model } from 'mongoose';
 import { Student, UserName } from './student.interface';
 
-const userNameSchema = new Schema<UserName>({
-    firstName: { type: String, required: true },
+const userNameSchema = new Schema({
+    firstName: { type: String, required: [true, 'First name is required'] },
     middleName: { type: String },
-    lastName: { type: String, required: true },
+    lastName: { type: String, required: [true, 'Last name is required'] },
 });
 
-// This is Schema
-const studentSchema = new Schema<Student>({
-    id: { type: String, required: true, unique: true },
+const studentSchema = new Schema({
+    id: {
+        type: String,
+        required: [true, 'Student ID is required'],
+        unique: true,
+    },
     name: {
         type: userNameSchema,
-        required: true,
+        required: [true, 'Name is required'],
     },
     gender: {
         type: String,
-        enum: ['male', 'female'],
-        required: true,
+        enum: {
+            values: ['male', 'female', 'other'],
+            message:
+                'Invalid value for gender: {VALUE}. Must be one of: male, female, other',
+        },
+        required: [true, 'Gender is required'],
     },
-    dateOfBirth: { type: String },
-    email: { type: String, required: true, unique: true },
-    contactNumber: { type: String, required: true },
+    dateOfBirth: {
+        type: String,
+        message: 'Invalid date format for dateOfBirth',
+    },
+    email: {
+        type: String,
+        required: [true, 'Email is required'],
+        unique: true,
+    },
+    contactNumber: {
+        type: String,
+        required: [true, 'Contact number is required'],
+    },
     bloodGroup: {
         type: String,
-        enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
+        enum: {
+            values: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
+            message:
+                'Invalid value for bloodGroup: {VALUE}. Must be one of: A+, A-, B+, B-, O+, O-, AB+, AB-',
+        },
     },
-    address: { type: String, required: true },
+    address: { type: String, required: [true, 'Address is required'] },
     profileImage: { type: String },
     isActive: {
         type: String,
-        enum: ['true', 'false'],
+        enum: {
+            values: ['true', 'false'],
+            message:
+                'Invalid value for isActive: {VALUE}. Must be one of: true, false',
+        },
         default: 'true',
     },
 });
