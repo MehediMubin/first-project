@@ -1,5 +1,5 @@
+import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { catchAsync } from '../student/student.controller';
 import { UserServices } from './user.service';
 
 const createStudent = catchAsync(async (req, res, next) => {
