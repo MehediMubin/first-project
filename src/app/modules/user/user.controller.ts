@@ -8,7 +8,9 @@ const createStudent = async (
     next: NextFunction,
 ) => {
     try {
-        const { password, student: studentData } = req.body;
+        const { async function name(params:type) {
+            password
+        }, student: studentData } = req.body;
 
         // called service function and send the data
         const result = await UserServices.createStudentIntoDB(
