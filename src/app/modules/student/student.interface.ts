@@ -1,3 +1,5 @@
+import { Types } from 'mongoose';
+
 export type UserName = {
     firstName: string;
     middleName?: string;
@@ -6,6 +8,7 @@ export type UserName = {
 
 export type Student = {
     id: string;
+    user: Types.ObjectId;
     name: UserName;
     gender: 'male' | 'female';
     dateOfBirth?: string;
@@ -14,5 +17,5 @@ export type Student = {
     bloodGroup?: 'A+' | 'A-' | 'B+' | 'B-' | 'O+' | 'O-' | 'AB+' | 'AB-';
     address: string;
     profileImage?: string;
-    isActive: 'true' | 'false';
+    isDeleted: boolean;
 };
