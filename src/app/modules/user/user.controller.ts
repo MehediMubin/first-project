@@ -1,34 +1,24 @@
-import { NextFunction, Request, Response } from 'express';
 import sendResponse from '../../utils/sendResponse';
+import { catchAsync } from '../student/student.controller';
 import { UserServices } from './user.service';
 
-const createStudent = async (
-    req: Request,
-    res: Response,
-    next: NextFunction,
-) => {
-    try {
-        const { async function name(params:type) {
-            password
-        }, student: studentData } = req.body;
+const createStudent = catchAsync(async (req, res, next) => {
+    const { password, student: studentData } = req.body;
 
-        // called service function and send the data
-        const result = await UserServices.createStudentIntoDB(
-            password,
-            studentData,
-        );
+    // called service function and send the data
+    const result = await UserServices.createStudentIntoDB(
+        password,
+        studentData,
+    );
 
-        // sending response
-        sendResponse(res, {
-            statusCode: 201,
-            success: true,
-            message: 'Student Created Successfully',
-            data: result,
-        });
-    } catch (err) {
-        next(err);
-    }
-};
+    // sending response
+    sendResponse(res, {
+        statusCode: 201,
+        success: true,
+        message: 'Student Created Successfully',
+        data: result,
+    });
+});
 
 export const UserController = {
     createStudent,
