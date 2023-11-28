@@ -1,8 +1,13 @@
-import { Router } from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 import { UserController } from './user.controller';
 
 const router = Router();
 
-router.post('/create-student', UserController.createStudent);
+const shenaBahini = (req: Request, res: Response, next: NextFunction) => {
+    console.log('i am shena bahini');
+    next();
+};
+
+router.post('/create-student', shenaBahini, UserController.createStudent);
 
 export const UserRoutes = router;
