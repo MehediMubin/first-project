@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import sendResponse from '../../utils/sendResponse';
 import { StudentServices } from './student.service';
 
 const getAllStudents = async (
@@ -9,7 +10,8 @@ const getAllStudents = async (
     try {
         const result = await StudentServices.getAllStudentsFromDB();
 
-        res.status(200).json({
+        sendResponse(res, {
+            statusCode: 200,
             success: true,
             message: 'Students are retrieved Successfully',
             data: result,
@@ -28,13 +30,14 @@ const getSingleStudent = async (
     try {
         const { id } = req.params;
         const result = await StudentServices.getSingleStudentFromDB(id);
-        res.status(200).json({
+
+        sendResponse(res, {
+            statusCode: 200,
             success: true,
             message: 'Single Student Retrieved Successfully',
             data: result,
         });
     } catch (err) {
-        // console.log(err);
         next(err);
     }
 };
